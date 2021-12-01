@@ -1,1 +1,3 @@
-# advent-of-code
+# Advent of Code 2021
+
+- [Day 1](/day1): Sonar Sweep
