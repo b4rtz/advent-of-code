@@ -4,40 +4,50 @@ def find_low_points(filename, part):
     with open(filename) as file:
         lines = [line.strip() for line in file.readlines()]
         location_groups = get_locations(lines)
-        # [print(loc) for loc in locations]
+        low_points = []
         for group in location_groups:
-            group_len = len(group[1]) #should always have values
+            length = len(group[0])
+            for i in range(length):
+                current = group[1][i]
+                if (i == 0):
+                    left = 9
+                else:
+                    left = group[1][i-1]
 
-            if (group[0]):
-                h1 = [h for h in group[0]]
-                print(h1)
+                if (i == length-1):
+                    right = 9
+                else:
+                    right = group[1][i+1]
 
-            h2 = [h for h in group[1]]
-            print(h2)
+                up = group[0][i]
+                down = group[2][i]
 
-            if (group[2]):
-                h3 = [h for h in group[2]]
-                print(h3)
-            # for loc in range(group_len):
-            #     print()
+                # print(f'current = {current}\nleft = {left}\nright = {right}\ndown = {down}')
+                lowest = min([current,left,right,up,down])
+                if current == lowest and lowest != 9:
+                    # print(f'Low point = {current}')
+                    low_points.append(current)
 
-    return [0]
+    return low_points
 
 def get_locations(lines):
     it = iter(lines)
-    previous = None
+    length = len(lines[0])
+    previous = [9]*length
     current = next(it)
 
     for next_item in it:
-        yield (previous,current,next_item)
+        yield (list(int(p) for p in previous),list(int(c) for c in current),list(int(n) for n in next_item))
         previous = current
         current = next_item
 
-    yield(previous,current,None)
+    yield(list(int(p) for p in previous),list(int(c) for c in current),list([9]*length))
 
 if __name__ == '__main__':
     file = sys.argv[1]
     part = sys.argv[2]
 
     low_points = find_low_points(file,part)
+    print(low_points)
     risk_level = [i+1 for i in low_points]
+    print(f'total risk level = {sum(risk_level)}')
