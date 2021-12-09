@@ -10,3 +10,4 @@ Each folder of this repo hosts my solution to the daily puzzle. Links to the puz
 - [Day 6](https://adventofcode.com/2021/day/6): Lanternfish
 - [Day 7](https://adventofcode.com/2021/day/7): The Treachery of Whales
 - [Day 8](https://adventofcode.com/2021/day/8): Seven Segment Search
+- [Day 9](https://adventofcode.com/2021/day/9): Smoke Basin
